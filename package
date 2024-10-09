@@ -7,6 +7,14 @@ arch=$(uname -m)
 [ ${arch} == 'aarch64' ] && { arch=arm64; }
 date=$(date +"%a, %d %b %Y %T %z")
 
+rm -rf build
+mkdir build
+(
+  cd build
+  cmake ..
+  make -j`nproc`
+)
+
 mkdir -p packages
 rm -rf debian
 mkdir -p debian/DEBIAN debian/usr/bin debian/usr/share/doc/${name}
