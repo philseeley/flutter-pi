@@ -1,0 +1,27 @@
+#!/bin/bash
+
+name=flutter-pi
+version=$(awk -F '"' '/^project\(flutter-pi/ {print $2}' CMakeLists.txt)
+arch=$(uname -m)
+[ ${arch} == 'x86_64' ] && { arch=amd64; }
+[ ${arch} == 'aarch64' ] && { arch=arm64; }
+date=$(date +"%a, %d %b %Y %T %z")
+
+mkdir -p packages
+rm -rf debian
+mkdir -p debian/DEBIAN debian/usr/bin debian/usr/share/doc/${name}
+
+m4 -D__VERSION__=$version -D__DATE__="$date" changelog.m4 > debian/usr/share/doc/${name}/changelog
+
+cp debian/usr/share/doc/${name}/changelog debian/usr/share/doc/${name}/changelog.Debian
+cp LICENSE debian/usr/share/doc/${name}
+cp build/flutter-pi debian/usr/bin
+
+gzip --force --best debian/usr/share/doc/${name}/changelog*
+
+size=$(du -s debian | awk '{print $1}')
+
+m4 -D__VERSION__=$version -D__ARCH__=${arch} -D__SIZE__=${size} debian-control.m4 > debian/DEBIAN/control
+
+fakeroot dpkg-deb --build debian packages
+

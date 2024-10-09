@@ -1,6 +1,8 @@
 /.vscode
 /build
 /out
+/debian/
+/packages/
 
 # CMake docs says it should not be checked in.
 CMakeUserPresets.json
