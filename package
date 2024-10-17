@@ -2,9 +2,7 @@
 
 name=flutter-pi
 version=$(awk -F '"' '/^project\(flutter-pi/ {print $2}' CMakeLists.txt)
-arch=$(uname -m)
-[ ${arch} == 'x86_64' ] && { arch=amd64; }
-[ ${arch} == 'aarch64' ] && { arch=arm64; }
+arch=$(dpkg --print-architecture)
 date=$(date +"%a, %d %b %Y %T %z")
 . /etc/os-release
 
