@@ -10,7 +10,7 @@ rm -rf build
 mkdir build
 (
   cd build
-  cmake ..
+  cmake -DDISABLE_CURSOR=ON ..
   make -j`nproc`
 )
 
