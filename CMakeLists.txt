@@ -83,7 +83,7 @@ else()
   set(flutterpi_languages C ASM)
 endif()
 
-project(flutter-pi LANGUAGES ${flutterpi_languages} VERSION "1.0.1")
+project(flutter-pi LANGUAGES ${flutterpi_languages} VERSION "1.0.2")
 
 message(STATUS "Generator .............. ${CMAKE_GENERATOR}")
 message(STATUS "Build Type ............. ${CMAKE_BUILD_TYPE}")
