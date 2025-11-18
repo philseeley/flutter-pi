@@ -10,7 +10,7 @@ rm -rf build
 mkdir build
 (
   cd build
-  cmake ..
+  cmake -DBUILD_GSTREAMER_AUDIO_PLAYER_PLUGIN=ON -DTRY_BUILD_GSTREAMER_AUDIO_PLAYER_PLUGIN=OFF ..
   make -j`nproc`
 )
 
